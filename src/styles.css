@@ -295,6 +295,11 @@ button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
 }
 
 @media (max-width: 780px) {
+  .start-copy { width: 100%; padding-inline: max(24px, env(safe-area-inset-left), env(safe-area-inset-right)); }
+  .start-copy h1 {
+    font-size: clamp(2.75rem, 14vw, 4rem);
+    transform: translateX(-.42em);
+  }
   .experience { padding: 0; }
   .stage { width: 100vw; height: 100dvh; max-height: none; aspect-ratio: auto; border-radius: 0; }
   .camera-chip { display: none; }
