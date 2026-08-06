@@ -291,7 +291,14 @@ button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
   .experience { padding: 0; }
   .stage { width: 100vw; height: 100dvh; max-height: none; aspect-ratio: auto; border-radius: 0; }
   .camera-chip, .text-button { display: none; }
-  .tutorial-sequence { gap: 22px; transform: scale(.78); }
+  .tutorial { padding-inline: 12px; }
+  .tutorial-sequence {
+    width: 100%; max-width: 390px; justify-content: center;
+    gap: clamp(4px, 2vw, 10px); transform: none;
+  }
+  .tutorial-step { flex: 1 1 0; min-width: 0; gap: 16px; }
+  .tutorial-sequence > b { flex: 0 0 auto; font-size: 1rem; }
+  .tutorial-step em { font-size: clamp(.58rem, 2.6vw, .76rem); text-align: center; }
   .topbar { padding: 18px; }
 }
 
