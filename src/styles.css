@@ -119,6 +119,13 @@ button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
 .primary-button:hover { transform: translateY(-2px); box-shadow: 0 10px 35px rgba(178,153,255,.2); }
 .privacy { margin: 24px auto 0; color: rgba(231,226,244,.43); font-size: .7rem; }
 .privacy span { color: #88e6bc; margin-right: 5px; }
+.copyright {
+  position: absolute; z-index: 1;
+  right: max(22px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  margin: 0; color: rgba(231,226,244,.34);
+  font-size: .58rem; letter-spacing: .08em;
+}
 
 .experience { height: 100dvh; padding: clamp(8px, 2vw, 24px); display: grid; place-items: center; background: #020207; }
 .stage { position: relative; width: min(100%, calc((100dvh - 48px) * 16 / 9)); aspect-ratio: 16 / 9; max-height: 100%; overflow: hidden; background: #090713; border-radius: var(--radius); box-shadow: 0 25px 90px #000; isolation: isolate; }
@@ -300,6 +307,11 @@ button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
   .tutorial-sequence > b { flex: 0 0 auto; font-size: 1rem; }
   .tutorial-step em { font-size: clamp(.58rem, 2.6vw, .76rem); text-align: center; }
   .topbar { padding: 18px; }
+  .copyright {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    font-size: .52rem;
+  }
 }
 
 @media (max-width: 420px) {
