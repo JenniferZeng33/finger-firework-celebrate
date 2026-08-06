@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060510" />
+    <meta name="description" content="Turn a fist-to-open-palm gesture into a canvas firework." />
+    <title>Finger Fireworks ✦</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="firework-burst" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-linecap="round">
+          <path d="M32 6v10M32 48v10M6 32h10M48 32h10" stroke-width="2.4" />
+          <path d="m13.6 13.6 7.1 7.1M43.3 43.3l7.1 7.1M50.4 13.6l-7.1 7.1M20.7 43.3l-7.1 7.1" stroke-width="2" />
+          <path d="m23.2 7.9 3.2 8.4M40.8 47.7l3.2 8.4M7.9 40.8l8.4-3.2M47.7 26.4l8.4-3.2" stroke-width="1.5" opacity=".72" />
+        </g>
+        <g fill="currentColor">
+          <circle cx="32" cy="32" r="3.2" /><circle cx="32" cy="3.5" r="1.7" />
+          <circle cx="60.5" cy="32" r="1.7" /><circle cx="32" cy="60.5" r="1.7" />
+          <circle cx="3.5" cy="32" r="1.7" /><circle cx="52.2" cy="11.8" r="1.4" />
+          <circle cx="52.2" cy="52.2" r="1.4" /><circle cx="11.8" cy="52.2" r="1.4" />
+          <circle cx="11.8" cy="11.8" r="1.4" />
+        </g>
+      </symbol>
+      <symbol id="gesture-fist-reference" viewBox="0 0 110 100">
+        <g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 47 17 27C17 18 21 14 29 13L40 12C44 8 50 7 56 8 63 9 67 12 68 17 77 17 83 20 86 27 94 27 98 31 98 37L97 62C96 80 83 91 64 94 46 95 29 90 18 79 13 74 13 67 14 58 14 53 15 50 17 47Z"></path>
+          <path d="M17 47C21 40 27 38 34 37L46 33 71 52C72 58 68 63 60 66 51 69 43 65 37 61L31 66"></path>
+          <path d="M17 43V27C17 19 21 15 29 14L39 13 40 38M40 13C44 8 51 7 57 9 64 11 68 15 68 22L67 49M68 18C76 18 83 22 86 28L84 53M86 28C94 28 98 32 98 38"></path>
+        </g>
+      </symbol>
+      <symbol id="gesture-open-reference" viewBox="0 0 110 100">
+        <g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M47 95C34 95 27 87 23 75L10 47C7 41 9 35 14 32 20 29 25 33 29 39L36 52 32 18C31 11 35 7 41 7 47 7 50 11 50 17L50 44 54 12C55 6 59 3 65 4 71 5 74 10 73 16L70 45 76 19C77 13 82 10 87 12 92 14 94 19 92 25L86 50 92 35C94 29 99 27 104 30 109 33 110 38 108 44L99 72C95 86 87 94 73 96L56 96C52 96 49 94 47 95Z"></path>
+          <path d="M38 64C49 69 57 75 58 84"></path>
+        </g>
+      </symbol>
+    </svg>
+    <main id="app">
+      <section id="start-screen" class="start-screen" aria-labelledby="start-title">
+        <div class="aurora" aria-hidden="true"></div>
+        <div class="start-copy">
+          <p class="eyebrow">Let’s celebrate</p>
+          <h1 id="start-title" aria-label="Finger Fireworks"><span class="title-first-line"><svg class="title-hand" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="hand-halo" cx="32" cy="34" r="9"></circle>
+            <svg class="gesture-poses" x="0" y="0" width="64" height="64" viewBox="0 0 110 100" overflow="visible">
+              <g class="gesture-pose gesture-pose-fist">
+                <path d="M17 47 17 27C17 18 21 14 29 13L40 12C44 8 50 7 56 8 63 9 67 12 68 17 77 17 83 20 86 27 94 27 98 31 98 37L97 62C96 80 83 91 64 94 46 95 29 90 18 79 13 74 13 67 14 58 14 53 15 50 17 47Z"></path>
+                <path d="M17 47C21 40 27 38 34 37L46 33 71 52C72 58 68 63 60 66 51 69 43 65 37 61L31 66"></path>
+                <path d="M17 43V27C17 19 21 15 29 14L39 13 40 38M40 13C44 8 51 7 57 9 64 11 68 15 68 22L67 49M68 18C76 18 83 22 86 28L84 53M86 28C94 28 98 32 98 38"></path>
+              </g>
+              <g class="gesture-pose gesture-pose-open">
+                <path d="M47 95C34 95 27 87 23 75L10 47C7 41 9 35 14 32 20 29 25 33 29 39L36 52 32 18C31 11 35 7 41 7 47 7 50 11 50 17L50 44 54 12C55 6 59 3 65 4 71 5 74 10 73 16L70 45 76 19C77 13 82 10 87 12 92 14 94 19 92 25L86 50 92 35C94 29 99 27 104 30 109 33 110 38 108 44L99 72C95 86 87 94 73 96L56 96C52 96 49 94 47 95Z"></path>
+                <path d="M38 64C49 69 57 75 58 84"></path>
+              </g>
+            </svg>
+            <g class="gesture-hand legacy-hand" fill="currentColor">
+              <path class="gesture-morph" d="M26 62 C21 59 17 54 17 48 L17 41 L9 35 C6 32 7 28 10 27 C13 26 15 28 18 31 L21 34 L21 13 C21 9 23 7 26 7 C29 7 30 9 30 12 L30 25 L30 8 C30 4 32 2 35 2 C38 2 39 4 39 8 L39 25 L40 11 C40 7 42 5 45 5 C48 5 49 7 49 11 L49 28 L50 17 C50 13 52 11 55 12 C58 13 59 15 59 19 L59 41 C59 54 51 62 40 63 Z">
+                <animate id="gesture-morph-animation" attributeName="d" dur="2.2s" repeatCount="indefinite" calcMode="spline"
+                  keyTimes="0; .14; .25; .35; .94; 1"
+                  keySplines=".4 0 .2 1; .2 .7 .2 1; .2 .75 .2 1; .4 0 .2 1; .4 0 .2 1"
+                  values="M24 58 C20 56 17 52 17 47 L17 43 L11 39 C8 36 9 33 12 32 C15 31 17 33 19 36 L20 38 L20 31 C20 28 22 26 25 26 C28 26 29 28 29 31 L29 33 L30 29 C30 26 32 24 35 24 C38 24 39 26 39 29 L39 33 L40 30 C40 27 42 25 45 25 C48 25 49 27 49 30 L49 35 L50 33 C50 30 52 28 55 29 C58 30 59 32 59 35 L59 43 C59 54 51 60 40 61 Z;
+                  M24 58 C20 56 17 52 17 47 L17 43 L11 39 C8 36 9 33 12 32 C15 31 17 33 19 36 L20 38 L20 31 C20 28 22 26 25 26 C28 26 29 28 29 31 L29 33 L30 29 C30 26 32 24 35 24 C38 24 39 26 39 29 L39 33 L40 30 C40 27 42 25 45 25 C48 25 49 27 49 30 L49 35 L50 33 C50 30 52 28 55 29 C58 30 59 32 59 35 L59 43 C59 54 51 60 40 61 Z;
+                  M25 60 C20 57 17 53 17 47 L17 42 L10 37 C7 34 8 30 11 29 C14 28 16 30 19 33 L21 36 L21 22 C21 18 23 16 26 16 C29 16 30 18 30 22 L30 28 L30 17 C30 13 32 11 35 11 C38 11 39 13 39 17 L39 28 L40 19 C40 15 42 13 45 13 C48 13 49 15 49 19 L49 31 L50 25 C50 21 52 19 55 20 C58 21 59 23 59 27 L59 42 C59 54 51 61 40 62 Z;
+                  M26 62 C21 59 17 54 17 48 L17 41 L9 35 C6 32 7 28 10 27 C13 26 15 28 18 31 L21 34 L21 13 C21 9 23 7 26 7 C29 7 30 9 30 12 L30 25 L30 8 C30 4 32 2 35 2 C38 2 39 4 39 8 L39 25 L40 11 C40 7 42 5 45 5 C48 5 49 7 49 11 L49 28 L50 17 C50 13 52 11 55 12 C58 13 59 15 59 19 L59 41 C59 54 51 62 40 63 Z;
+                  M26 62 C21 59 17 54 17 48 L17 41 L9 35 C6 32 7 28 10 27 C13 26 15 28 18 31 L21 34 L21 13 C21 9 23 7 26 7 C29 7 30 9 30 12 L30 25 L30 8 C30 4 32 2 35 2 C38 2 39 4 39 8 L39 25 L40 11 C40 7 42 5 45 5 C48 5 49 7 49 11 L49 28 L50 17 C50 13 52 11 55 12 C58 13 59 15 59 19 L59 41 C59 54 51 62 40 63 Z;
+                  M24 58 C20 56 17 52 17 47 L17 43 L11 39 C8 36 9 33 12 32 C15 31 17 33 19 36 L20 38 L20 31 C20 28 22 26 25 26 C28 26 29 28 29 31 L29 33 L30 29 C30 26 32 24 35 24 C38 24 39 26 39 29 L39 33 L40 30 C40 27 42 25 45 25 C48 25 49 27 49 30 L49 35 L50 33 C50 30 52 28 55 29 C58 30 59 32 59 35 L59 43 C59 54 51 60 40 61 Z" />
+              </path>
+            </g>
+          </svg>FINGER</span><br /><span class="title-second-line"><span class="title-second-word">FIREWOR<span class="title-k">K<svg viewBox="0 0 595.5 1180.56" preserveAspectRatio="none" aria-hidden="true"><path class="title-k-outline" d="M20 250H165V562L401 250H571L318 564L580 970H411L217 663L164 742V970H20Z"></path></svg></span>S</span> <svg class="title-firework" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="burst-halo" cx="32" cy="32" r="8"></circle>
+            <g class="burst-rays" fill="none" stroke="currentColor" stroke-linecap="round">
+              <path pathLength="1" d="M32 27V8"></path><path pathLength="1" d="M37 29 50.5 15.5"></path>
+              <path pathLength="1" d="M39 32h19"></path><path pathLength="1" d="m37 37 13.5 13.5"></path>
+              <path pathLength="1" d="M32 39v19"></path><path pathLength="1" d="M27 37 13.5 50.5"></path>
+              <path pathLength="1" d="M25 32H6"></path><path pathLength="1" d="M27 29 13.5 15.5"></path>
+            </g>
+            <g class="burst-sparks" fill="currentColor">
+              <circle cx="32" cy="4" r="1.7"></circle><circle cx="52" cy="12" r="1.4"></circle>
+              <circle cx="60" cy="32" r="1.7"></circle><circle cx="52" cy="52" r="1.4"></circle>
+              <circle cx="32" cy="60" r="1.7"></circle><circle cx="12" cy="52" r="1.4"></circle>
+              <circle cx="4" cy="32" r="1.7"></circle><circle cx="12" cy="12" r="1.4"></circle>
+            </g>
+            <circle class="burst-core" cx="32" cy="32" r="3.6"></circle>
+          </svg></span></h1>
+          <p class="subtitle">Turn a gesture into light.</p>
+          <p class="occasion-copy">For birthdays, tiny wins, and every moment<br class="desktop-break" /> worth lighting up.</p>
+          <button id="start-button" class="primary-button" type="button">
+            <span>Start Experience</span><span aria-hidden="true">↗</span>
+          </button>
+          <p class="privacy"><span aria-hidden="true">◉</span> Your camera stays on this device. Nothing is uploaded; recording only starts when you choose it.</p>
+        </div>
+      </section>
+
+      <section id="experience" class="experience is-hidden" aria-label="Finger Fireworks live experience">
+        <div id="stage" class="stage">
+          <video id="webcam" playsinline muted aria-label="Mirrored live camera preview"></video>
+          <div class="cinematic-overlay" aria-hidden="true"></div>
+          <canvas id="effects-canvas" aria-hidden="true"></canvas>
+          <canvas id="debug-canvas" aria-hidden="true"></canvas>
+          <div id="screen-flash" class="screen-flash" aria-hidden="true"></div>
+
+          <header class="topbar">
+            <div class="brand-block">
+              <p class="mini-brand">FINGER FIREWORKS <svg class="firework-mark mini-mark" aria-hidden="true"><use href="#firework-burst"></use></svg></p>
+              <div id="gesture-reminder" class="gesture-reminder is-hidden" aria-label="Make a fist, then open your hand, then a firework">
+                <svg class="gesture-symbol reminder-gesture" aria-hidden="true"><use href="#gesture-fist-reference"></use></svg><b>→</b>
+                <svg class="gesture-symbol reminder-gesture" aria-hidden="true"><use href="#gesture-open-reference"></use></svg><b>→</b><svg class="firework-mark reminder-mark" aria-hidden="true"><use href="#firework-burst"></use></svg>
+              </div>
+            </div>
+            <div class="controls">
+              <div class="camera-chip"><span id="camera-dot"></span><span id="camera-label">Camera ready</span></div>
+              <button id="record-button" class="icon-button text-button record-button" type="button" aria-pressed="false">Record</button>
+              <button id="back-button" class="icon-button has-tooltip" type="button" aria-label="Back to start" data-tooltip="Back to start">←</button>
+              <button id="tutorial-button" class="icon-button has-tooltip" type="button" aria-label="Replay gesture tutorial" data-tooltip="Replay tutorial">↻</button>
+              <button id="fullscreen-button" class="icon-button has-tooltip" type="button" aria-label="Enter fullscreen" data-tooltip="Open fullscreen">⛶</button>
+            </div>
+          </header>
+
+          <div id="recording-hud" class="recording-hud" aria-live="polite">
+            <div class="recording-status"><span aria-hidden="true"></span><strong>REC</strong><time id="recording-time" datetime="PT0S">00:00</time></div>
+            <button id="cancel-recording-button" class="cancel-recording-button" type="button">Cancel</button>
+            <button id="stop-recording-button" class="stop-recording-button" type="button">Stop recording</button>
+          </div>
+
+          <div id="loading-panel" class="loading-panel">
+            <span class="loader" aria-hidden="true"></span>
+            <p id="loading-title">Opening the camera…</p>
+            <small id="loading-detail">Your video never leaves this browser.</small>
+          </div>
+
+          <div id="countdown" class="countdown is-hidden" aria-live="polite"></div>
+
+          <div id="tutorial" class="tutorial is-hidden">
+            <div class="tutorial-sequence" aria-hidden="true">
+              <div class="tutorial-step"><svg class="gesture-symbol tutorial-gesture" aria-hidden="true"><use href="#gesture-fist-reference"></use></svg><em>Make a fist</em></div>
+              <b>→</b>
+              <div class="tutorial-step"><svg class="gesture-symbol tutorial-gesture" aria-hidden="true"><use href="#gesture-open-reference"></use></svg><em>Open your hand</em></div>
+              <b>→</b>
+              <div class="tutorial-step"><svg class="firework-mark tutorial-mark" aria-hidden="true"><use href="#firework-burst"></use></svg><em>Release the magic</em></div>
+            </div>
+          </div>
+
+          <div class="instruction-wrap">
+            <p id="instruction-kicker">GESTURE ONE</p>
+            <h2 id="instruction" aria-live="polite">Show your hand</h2>
+          </div>
+          <p id="hand-status" class="hand-status"><span></span> Waiting for hand</p>
+          <pre id="debug-panel" class="debug-panel is-hidden"></pre>
+
+          <div id="error-panel" class="error-panel is-hidden" role="alert">
+            <span class="error-symbol" aria-hidden="true">×</span>
+            <h2 id="error-title">Something went wrong</h2>
+            <p id="error-message"></p>
+            <button id="retry-button" class="primary-button" type="button">Try again</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./file-protocol-help.js"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
