@@ -1,12 +1,15 @@
-const MP4_TYPES = [
-  'video/mp4;codecs=avc1.42E01E',
-  'video/mp4;codecs=avc1',
-  'video/mp4',
+const RECORDING_FORMATS = [
+  { mimeType: 'video/mp4;codecs=avc1.42E01E', extension: 'mp4' },
+  { mimeType: 'video/mp4;codecs=avc1', extension: 'mp4' },
+  { mimeType: 'video/mp4', extension: 'mp4' },
+  { mimeType: 'video/webm;codecs=vp9', extension: 'webm' },
+  { mimeType: 'video/webm;codecs=vp8', extension: 'webm' },
+  { mimeType: 'video/webm', extension: 'webm' },
 ];
 
-function pickMp4Type() {
+function pickRecordingFormat() {
   if (typeof MediaRecorder === 'undefined') return null;
-  return MP4_TYPES.find((type) => MediaRecorder.isTypeSupported(type)) || null;
+  return RECORDING_FORMATS.find(({ mimeType }) => MediaRecorder.isTypeSupported(mimeType)) || null;
 }
 
 function even(value) {
@@ -48,8 +51,8 @@ export class ExperienceRecorder {
     if (typeof this.canvas.captureStream !== 'function' || typeof MediaRecorder === 'undefined') {
       throw new Error('Video recording is not supported by this browser.');
     }
-    const mimeType = pickMp4Type();
-    if (!mimeType) throw new Error('This browser cannot encode MP4. Try the latest Safari, Chrome, or Edge.');
+    const format = pickRecordingFormat();
+    if (!format) throw new Error('Video recording is not supported by this mobile browser. Try the latest Safari or Chrome.');
 
     const stageRect = this.stage.getBoundingClientRect();
     const aspect = Math.max(.5, stageRect.width / Math.max(stageRect.height, 1));
@@ -63,11 +66,11 @@ export class ExperienceRecorder {
     this.outputStream = this.canvas.captureStream(30);
     this.chunks = [];
     this.discard = false;
-    this.mediaRecorder = new MediaRecorder(this.outputStream, { mimeType, videoBitsPerSecond: 8_000_000 });
+    this.mediaRecorder = new MediaRecorder(this.outputStream, { mimeType: format.mimeType, videoBitsPerSecond: 8_000_000 });
     this.mediaRecorder.addEventListener('dataavailable', (event) => {
       if (event.data?.size) this.chunks.push(event.data);
     });
-    this.mediaRecorder.addEventListener('stop', () => this.finish(mimeType), { once: true });
+    this.mediaRecorder.addEventListener('stop', () => this.finish(format), { once: true });
     this.mediaRecorder.addEventListener('error', (event) => {
       this.cleanup();
       this.onStateChange?.('error', event.error || new Error('Recording failed.'));
@@ -138,7 +141,7 @@ export class ExperienceRecorder {
     this.animationId = requestAnimationFrame(this.drawFrame);
   };
 
-  finish(mimeType) {
+  finish({ mimeType, extension }) {
     if (this.discard) {
       this.cleanup();
       this.onStateChange?.('idle', { discarded: true });
@@ -148,7 +151,7 @@ export class ExperienceRecorder {
     }
     const blob = new Blob(this.chunks, { type: mimeType });
     const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `finger-fireworks-${stamp}.mp4`;
+    const filename = `finger-fireworks-${stamp}.${extension}`;
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;

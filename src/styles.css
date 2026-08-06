@@ -290,7 +290,7 @@ button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
 @media (max-width: 780px) {
   .experience { padding: 0; }
   .stage { width: 100vw; height: 100dvh; max-height: none; aspect-ratio: auto; border-radius: 0; }
-  .camera-chip, .text-button { display: none; }
+  .camera-chip { display: none; }
   .tutorial { padding-inline: 12px; }
   .tutorial-sequence {
     width: 100%; max-width: 390px; justify-content: center;
@@ -300,6 +300,20 @@ button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
   .tutorial-sequence > b { flex: 0 0 auto; font-size: 1rem; }
   .tutorial-step em { font-size: clamp(.58rem, 2.6vw, .76rem); text-align: center; }
   .topbar { padding: 18px; }
+}
+
+@media (max-width: 420px) {
+  .topbar { padding: 14px 12px; gap: 8px; }
+  .mini-brand { margin-bottom: 8px; font-size: .52rem; letter-spacing: .1em; }
+  .gesture-reminder { gap: 5px; }
+  .controls { gap: 5px; }
+  .icon-button { height: 32px; min-width: 32px; padding-inline: 7px; }
+  .record-button { min-width: 38px; padding-inline: 8px; font-size: 0; }
+  .record-button::after { content: "REC"; font-size: .58rem; letter-spacing: .04em; }
+  .recording-hud { top: 14px; left: 12px; right: 12px; gap: 6px; justify-content: flex-end; }
+  .recording-status, .cancel-recording-button, .stop-recording-button { height: 34px; }
+  .recording-status { padding-inline: 9px; font-size: .58rem; }
+  .cancel-recording-button, .stop-recording-button { padding-inline: 10px; font-size: .6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
