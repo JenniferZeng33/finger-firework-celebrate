@@ -2,6 +2,10 @@
 
 A self-contained webcam experience that turns a deliberate **closed fist → open palm** gesture into an elegant Canvas 2D firework. It can track two hands at once, with an independent gesture sequence for each hand, so near-simultaneous releases create overlapping fireworks. Camera frames and hand landmarks stay in the browser; nothing is uploaded. Recording only begins when the user presses **Record**.
 
+**Live demo:** [finger-firework-celebrate.vercel.app](https://finger-firework-celebrate.vercel.app/)
+
+**Created by:** [Jennifer Zeng](https://github.com/JenniferZeng33)
+
 The Record control switches the stage to a clean performance view, shows a live elapsed timer, and composites the mirrored camera plus fireworks into a local MP4. Pressing **Stop recording** automatically downloads the file. MP4 recording requires a browser that exposes native MP4 support through `MediaRecorder`.
 
 ## Technology
@@ -122,3 +126,11 @@ Recent desktop Chrome and Edge offer the most consistent MediaPipe/WebGL perform
 Manually test each hand alone, both hands simultaneously, close/far distances, slow/fast transitions, open-without-fist, disappearance while armed, partial framing, dim light, busy backgrounds, resize, fullscreen, permission denial, a missing model, reduced motion, and repeated use for at least three minutes.
 
 Geometry-only classification is intentionally lightweight. Severe foreshortening, fingers hidden behind one another, very low light, and a hand parallel to the image plane at an extreme angle can return `UNKNOWN`. Returning `UNKNOWN` is safer than producing an accidental firework.
+
+## Citation
+
+If you reference this project in research, writing, or another published work, use the repository's **Cite this repository** control or the metadata in [`CITATION.cff`](CITATION.cff).
+
+## License
+
+Copyright © 2026 Jennifer Zeng. All rights reserved. The source code is publicly available for portfolio review; no open-source license is granted.
