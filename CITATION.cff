@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you reference this project, please cite it using the metadata below."
+type: software
+title: "Finger Fireworks"
+abstract: "A browser-based two-hand gesture experience that turns a closed-fist-to-open-palm motion into Canvas 2D fireworks."
+authors:
+  - family-names: "Zeng"
+    given-names: "Jennifer"
+version: 1.0.0
+date-released: 2026-08-06
+repository-code: "https://github.com/JenniferZeng33/finger-firework-celebrate"
+url: "https://finger-firework-celebrate.vercel.app/"
